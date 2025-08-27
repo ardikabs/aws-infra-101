@@ -1,0 +1,68 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "LogPolicyForECS",
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogStreams"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "ComputePolicyForECS",
+      "Action": [
+        "ecs:DescribeServices",
+        "ecs:CreateTaskSet",
+        "ecs:UpdateServicePrimaryTaskSet",
+        "ecs:DeleteTaskSet",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:DescribeListeners",
+        "elasticloadbalancing:ModifyListener",
+        "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:ModifyRule",
+        "lambda:InvokeFunction",
+        "cloudwatch:DescribeAlarms",
+        "sns:Publish"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "IAMPolicyForECS",
+      "Action": [
+        "s3:GetObject",
+        "s3:GetObjectVersion",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": [
+        "arn:aws:s3:::ecs-configs-123456789012/*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "ParameterStorePolicyForECS",
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameter",
+        "ssm:GetParametersByPath",
+        "ssm:GetParameterHistory",
+        "ssm:GetParameters"
+      ],
+      "Resource": [
+        "arn:aws:ssm:ap-east-1:987654321098:parameter/secrets/*",
+        "arn:aws:ssm:ap-east-1:987654321098:parameter/dbsecrets/*"
+      ]
+    },
+    {
+      "Sid": "ECSAutoscalingPolicy",
+      "Effect": "Allow",
+      "Action": [
+        "application-autoscaling:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

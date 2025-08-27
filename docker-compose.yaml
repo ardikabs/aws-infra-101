@@ -1,0 +1,9 @@
+services:
+  local:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /workspace
+    volumes:
+      - ${HOME}/.aws:/root/.aws
+      - .:/workspace
